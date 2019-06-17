@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_alarm"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Enable Alarm" />
+    </group>
+
+    <item android:title="Other tools">
+        <menu>
+            <item
+                android:id="@+id/nav_notification"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Get notification" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send Message" />
+            <item
+                android:id="@+id/nav_note"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Notes" />
+        </menu>
+    </item>
+
+</menu>

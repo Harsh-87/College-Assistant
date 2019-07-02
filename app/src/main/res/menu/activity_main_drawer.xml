@@ -12,6 +12,10 @@
             android:id="@+id/nav_alarm"
             android:icon="@drawable/ic_menu_send"
             android:title="Enable Alarm" />
+        <item
+            android:id="@+id/recycler"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Recycler" />
     </group>
 
     <item android:title="Other tools">
@@ -28,6 +32,7 @@
                 android:id="@+id/nav_note"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Notes" />
+
         </menu>
     </item>
 

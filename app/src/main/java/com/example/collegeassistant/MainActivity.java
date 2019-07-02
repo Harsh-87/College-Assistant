@@ -363,6 +363,11 @@ public class MainActivity extends AppCompatActivity implements customButtonListe
             startActivity(in);
         }
 
+        if(item.getItemId() == R.id.recycler){
+            Intent in = new Intent(MainActivity.this,Recycler_Activity.class);
+            startActivity(in);
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

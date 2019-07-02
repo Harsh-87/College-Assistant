@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="10dp"
+    tools:context=".ExampleItem">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_margin="5dp"
+        android:elevation="50sp">
+
+        <TextView
+            android:id="@+id/msubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:text="Line 1"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/mark_present"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/greenround"
+            android:text="P"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/mark_absent"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="63dp"
+            android:layout_marginBottom="37dp"
+            android:background="@drawable/redround"
+            android:text="A"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/mfinal_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msubject"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="13dp"
+            android:text="Line 2"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/mdelete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="333dp"
+            android:layout_marginEnd="284dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_delete_black_24dp" />
+
+
+        <TextView
+            android:id="@+id/attended_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="-4dp"
+            android:text="0"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="-4dp"
+            android:gravity="center"
+            android:text="/"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/total_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="-4dp"
+            android:text="0"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

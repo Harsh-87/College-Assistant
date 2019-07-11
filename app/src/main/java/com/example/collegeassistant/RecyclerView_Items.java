@@ -1,6 +1,6 @@
 package com.example.collegeassistant;
 
-public class ExampleItem {
+public class RecyclerView_Items {
 
     private String mSubject;
     private int mAttended;
@@ -8,11 +8,11 @@ public class ExampleItem {
     private double mPercentage;
 
 
-    public ExampleItem( String subject, double percent,int attended,int total) {
+    public RecyclerView_Items(String subject, double percent, int attended, int total) {
         mSubject = subject;
         mAttended = attended;
         mTotal = total;
-        mPercentage = mPercentage;
+        mPercentage = percent;
     }
 
 

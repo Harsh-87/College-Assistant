@@ -4,116 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="4dp"
-    android:layout_margin="10dp"
-    tools:context=".ExampleItem">
+    android:layout_margin="8sp"
+    android:elevation="10sp"
+    app:cardCornerRadius="20sp"
+    tools:context=".RecyclerView_Items">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70sp"
-        android:layout_margin="5dp"
-        android:elevation="50sp">
+        android:layout_height="80sp">
 
-        <TextView
-            android:id="@+id/msubject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <TableLayout
+            android:layout_width="200sp"
+            android:layout_height="80sp">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/msubject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="10sp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Line 1"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/mfinal_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25sp"
+                    android:layout_marginTop="10sp"
+                    android:text="Line 2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10sp"
+                    android:text=" % "
+                    android:textSize="15sp" />
+            </TableRow>
+        </TableLayout>
+
+
+
+        <TableLayout
+            android:layout_width="100sp"
+            android:layout_height="80sp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            android:text="Line 1"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="italic" />
-
-        <Button
-            android:id="@+id/mark_present"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="35dp"
-            android:background="@drawable/greenround"
-            android:text="P"
-            android:textSize="20sp" />
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/mark_absent"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="37dp"
-            android:background="@drawable/redround"
-            android:text="A"
-            android:textSize="20sp" />
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">
 
-        <TextView
-            android:id="@+id/mfinal_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/msubject"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="13dp"
-            android:text="Line 2"
-            android:textSize="15sp" />
+                <LinearLayout android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/mdelete"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="333dp"
-            android:layout_marginEnd="284dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_delete_black_24dp" />
+                    <Button
+                        android:id="@+id/mark_absent"
+                        android:layout_width="40sp"
+                        android:layout_height="35sp"
+                        android:layout_margin="5sp"
+                        android:background="@drawable/redround"
+                        android:text="A"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/mark_present"
+                        android:layout_width="40sp"
+                        android:layout_height="35sp"
+                        android:layout_margin="5sp"
+                        android:background="@drawable/greenround"
+                        android:text="P"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <LinearLayout android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/attended_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:gravity="center"
+                        android:text="/"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/total_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
 
 
-        <TextView
-            android:id="@+id/attended_class"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="72dp"
-            android:layout_marginBottom="-4dp"
-            android:text="0"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="-4dp"
-            android:gravity="center"
-            android:text="/"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/total_class"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="-4dp"
-            android:text="0"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="italic" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -6,16 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/nav_person_black"
             android:title="Profile" />
         <item
             android:id="@+id/nav_alarm"
             android:icon="@drawable/ic_menu_send"
             android:title="Enable Alarm" />
-        <item
-            android:id="@+id/recycler"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Recycler" />
     </group>
 
     <item android:title="Other tools">
@@ -30,7 +26,7 @@
                 android:title="Send Message" />
             <item
                 android:id="@+id/nav_note"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/nav_edit_black"
                 android:title="Notes" />
 
         </menu>

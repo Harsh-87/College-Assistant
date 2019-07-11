@@ -1,135 +1,153 @@
 package com.example.collegeassistant;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import com.example.collegeassistant.db.DatabaseAccess;
 
-import static android.content.Context.MODE_PRIVATE;
+import java.util.List;
+
 
 public class Notes extends AppCompatActivity {
-
-    static ListView notelist ;
-    static ArrayList<String> notes;
-    static ArrayAdapter note_adapter;
-    static  int  number_of_notes;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.note_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()){
-            case R.id.add_note:
-                notes.add("New note");
-                number_of_notes++;
-                note_adapter.notifyDataSetChanged();
-                Intent intent = new Intent(getApplicationContext(),Write_note.class);
-                intent.putExtra("noteId",number_of_notes);
-                startActivity(intent);
-                final SharedPreferences sp = this.getSharedPreferences("ccom.example.collegeassistant",MODE_PRIVATE);
-                sp.edit().putInt("amount",number_of_notes).apply();
-                note_adapter.notifyDataSetChanged();
-                return true;
-            default : return false;
-        }
-
-    }
-
+    private ListView listView;
+    private ImageButton btnAdd;
+    private DatabaseAccess databaseAccess;
+    private List<Note_work> memos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes);
-
-        notelist = (ListView) findViewById(R.id.notelist);
-        notes = new ArrayList<String>();
-        final SharedPreferences sp = this.getSharedPreferences("com.example.collegeassistant",MODE_PRIVATE);
-
-        try {
-            notes = (ArrayList<String>) ObjectSerializer.deserialize(sp.getString("notes", ObjectSerializer.serialize(new ArrayList<String>())));
-            number_of_notes = (int) sp.getInt("amount",0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        note_adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,notes);
-        notelist.setAdapter(note_adapter);
-
-        if(number_of_notes == 0){
-            notes.add("first");
-            number_of_notes++;
-            note_adapter.notifyDataSetChanged();
-            Intent intent = new Intent(getApplicationContext(),Write_note.class);
-            intent.putExtra("noteId",number_of_notes);
-            startActivity(intent);
-            final SharedPreferences save = this.getSharedPreferences("com.example.collegeassistant",MODE_PRIVATE);
-            save.edit().putInt("amount",number_of_notes).apply();
-            note_adapter.notifyDataSetChanged();
+        setContentView(R.layout.notes);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
 
-        notelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.databaseAccess = DatabaseAccess.getInstance(this);
+
+        this.listView = (ListView) findViewById(R.id.listView);
+        this.btnAdd = (ImageButton) findViewById(R.id.btnAdd);
+
+        this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(),Write_note.class);
-                intent.putExtra("noteId",i);
-                startActivity(intent);
+            public void onClick(View v) {
+                onAddClicked();
             }
         });
 
-        notelist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final int position = i;
-
-                new AlertDialog.Builder(Notes.this)
-                        .setTitle("Delete")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage("Are you sure you want to delete this note.")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                notes.remove(position);
-                                note_adapter.notifyDataSetChanged();
-                                try {
-                                    sp.edit().putString("notes",ObjectSerializer.serialize(Notes.notes)).apply();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                Toast.makeText(Notes.this, "Note deleted", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(Notes.this, "Note not deleted", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .show();
-
-                return true;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Note_work memo = memos.get(position);
+                TextView txtMemo = (TextView) view.findViewById(R.id.txtMemo);
+                if (memo.isFullDisplayed()) {
+                    txtMemo.setText(memo.getShortText());
+                    memo.setFullDisplayed(false);
+                } else {
+                    txtMemo.setText(memo.getText());
+                    memo.setFullDisplayed(true);
+                }
             }
         });
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        databaseAccess.open();
+        this.memos = databaseAccess.getAllMemos();
+        databaseAccess.close();
+        MemoAdapter adapter = new MemoAdapter(this, memos);
+        this.listView.setAdapter(adapter);
+    }
+
+    public void onAddClicked() {
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivity(intent);
+    }
+
+    public void onDeleteClicked(Note_work memo) {
+        databaseAccess.open();
+        databaseAccess.delete(memo);
+        databaseAccess.close();
+
+        ArrayAdapter<Note_work> adapter = (ArrayAdapter<Note_work>) listView.getAdapter();
+        adapter.remove(memo);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onEditClicked(Note_work memo) {
+        Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("MEMO", memo);
+        startActivity(intent);
+    }
+
+    private class MemoAdapter extends ArrayAdapter<Note_work> {
+
+
+        public MemoAdapter(Context context, List<Note_work> objects) {
+            super(context, 0, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.layout_list_item, parent, false);
+            }
+
+            ImageView btnEdit = (ImageView) convertView.findViewById(R.id.btnEdit);
+            ImageView btnDelete = (ImageView) convertView.findViewById(R.id.btnDelete);
+            TextView txtDate = (TextView) convertView.findViewById(R.id.txtDate);
+            TextView txtMemo = (TextView) convertView.findViewById(R.id.txtMemo);
+
+            final Note_work memo = memos.get(position);
+            memo.setFullDisplayed(false);
+            txtDate.setText(memo.getDate());
+            txtMemo.setText(memo.getShortText());
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onEditClicked(memo);
+                }
+            });
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onDeleteClicked(memo);
+                }
+            });
+            return convertView;
+        }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+
 }

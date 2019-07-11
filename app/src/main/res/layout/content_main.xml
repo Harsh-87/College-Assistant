@@ -8,14 +8,38 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-    <ListView
-        android:id="@+id/list"
-        android:longClickable="true"
-        android:clickable="true"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/content_main" />
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="Subjects"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:padding="4sp"
+        android:scrollbars="vertical" />
+
+    <ImageButton
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:background="@drawable/ic_add_circle_black_24dp"
+        android:id="@+id/add_subject"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20sp"/>
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.collegeassistant">
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -13,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".Notes" android:label="Notepad"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -23,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".proxy_sender"
             android:exported="true">
@@ -32,12 +36,12 @@
             </intent-filter>
         </receiver>
         <receiver android:name=".AlarmReceiver" />
-        <activity android:name=".ExampleItem" />
-        <activity android:name=".Recycler_Activity" />
-        <activity android:name=".Details" />
-        <activity android:name=".Notes" />
-        <activity android:name=".Write_note" />
-        <activity android:name=".Messaging"/>
+
+        <activity android:name=".RecyclerView_Items" />
+        <activity
+            android:name=".Details"
+            android:label="Profile" />
+        <activity android:name=".Messaging" />
     </application>
 
 </manifest>
